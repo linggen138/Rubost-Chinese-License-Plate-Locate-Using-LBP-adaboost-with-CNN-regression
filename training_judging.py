@@ -5,7 +5,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD
-import theano
+#import theano
 
 import numpy as np
 
@@ -105,8 +105,8 @@ def train(pathT,pathF):
     data = loadData(pathT,pathF);
 
     training_data,training_label  = arrangeData(data)
-    print training_label.shape,training_data.shape
-    print training_label
+    print(training_label.shape,training_data.shape)
+    print(training_label)
     model.fit(training_data,training_label,nb_epoch=50,validation_split=0.1,show_accuracy=True)
     model.save("./judge1.h5")
 

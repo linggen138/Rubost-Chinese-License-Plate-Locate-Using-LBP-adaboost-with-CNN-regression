@@ -132,7 +132,7 @@ models = getmodel("model_t5_regression.h5")
 
 path = "./general_test"
 
-for parent,dirnames,filenames in os.walk("/Users/yujinke/Desktop/EasyPR/resources/image/general_test"):
+for parent,dirnames,filenames in os.walk("/home/gua/PycharmProjects/Rubost-Chinese-License-Plate-Locate-Using-LBP-adaboost-with-CNN-regression/general_test"):
 
     for filename in filenames:
     # while(1):
@@ -146,7 +146,7 @@ for parent,dirnames,filenames in os.walk("/Users/yujinke/Desktop/EasyPR/resource
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             t0 = time.time()
             watches = watch_cascade.detectMultiScale(gray, 1.1, 2,minSize=(76 , 18))
-            print time.time() - t0
+            print(time.time() - t0)
             for (x, y, w, h) in watches:
                 #cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 1)
                 patch  = img_bak[y:y + h, x:x + w]
@@ -157,7 +157,7 @@ for parent,dirnames,filenames in os.walk("/Users/yujinke/Desktop/EasyPR/resource
                 # patch[:, :, 2] = cv2.equalizeHist(patch[:, :, 2])
                 vector = tj.norm(patch)
                 prob = model.predict(np.array([vector]))[0]
-                print prob
+                print(prob)
                 prob_1 = prob[0]
                 prob_2 = prob[1]
                 #cv2.putText(img,str(round(prob_1,2)),(x,y+15),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,0,255))
@@ -198,7 +198,7 @@ for parent,dirnames,filenames in os.walk("/Users/yujinke/Desktop/EasyPR/resource
 
                 remap_points = np.array([[0,0],[136,0],[136,36],[0,36]],dtype=np.float32);
 
-                print points,remap_points
+                print(points,remap_points)
                 M = cv2.getPerspectiveTransform(np.array(points,dtype=np.float32),remap_points)
                 warp_image  = cv2.warpPerspective(img,M,(136,36))
                 cv2.imshow("warp_image",warp_image)
@@ -213,6 +213,6 @@ for parent,dirnames,filenames in os.walk("/Users/yujinke/Desktop/EasyPR/resource
 
 
 
-            print count
+            print(count)
             cv2.imshow("img",img)
             cv2.waitKey(0)
